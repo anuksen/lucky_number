@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Объявляем пустой массив ticket для цифр целочисленного типа
 ticket = []
 again = 'y'
