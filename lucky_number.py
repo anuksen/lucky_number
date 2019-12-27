@@ -1,4 +1,14 @@
 #!/usr/bin/env python
+
+
+def addition(t_array):
+    # Суммируем первые три и последние три цифры билета
+    part1 = t_array[0] + t_array[1] + t_array[2]
+    part2 = t_array[3] + t_array[4] + t_array[5]
+    # Сравнение сумм и возвращение ответа
+    return part1 == part2
+
+
 # Объявляем пустой массив ticket для цифр целочисленного типа
 ticket = []
 again = 'y'
@@ -31,14 +41,12 @@ while again == 'y':
                     ticket = []
                     break
 
-        # Суммируем первые три и последние три цифры билета
-        part1 = ticket[0]+ticket[1]+ticket[2]
-        part2 = ticket[3]+ticket[4]+ticket[5]
         # Сравниваем суммы и выносим вердикт
-        if part1 == part2:
+        if addition(ticket):
             print("Да ты счастливчик!")
         else:
             print("Повезёт в следующий раз.")
+
         ticket = []
         again = input("Ещё билетик? y/n: ")
     else:
