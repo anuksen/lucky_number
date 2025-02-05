@@ -1,27 +1,27 @@
 #!/usr/bin/env python
 
 import unittest
-import lucky_ticket
+from lucky_ticket import is_lucky_ticket  # Импортируем функцию из вашего скрипта
 
+class TestLuckyTicket(unittest.TestCase):
+    def test_valid_lucky_ticket(self):
+        # Тестируем корректные счастливые билеты
+        self.assertTrue(is_lucky_ticket("123321"))  # 1+2+3 == 3+2+1
+        self.assertTrue(is_lucky_ticket("000000"))  # 0+0+0 == 0+0+0
+        self.assertFalse(is_lucky_ticket("111222"))  # 1+1+1 != 2+2+2 (несчастливый билет)
 
-# Тестирование функции, оценивающей равенство половин числа
-class PartsOfNumberTests(unittest.TestCase):
+    def test_valid_non_lucky_ticket(self):
+        # Тестируем корректные, но несчастливые билеты
+        self.assertFalse(is_lucky_ticket("123456"))  # 1+2+3 != 4+5+6
+        self.assertFalse(is_lucky_ticket("654321"))  # 6+5+4 != 3+2+1
 
-    # Этот тест должен привести к равенству
-    def test_addition_equal(self):
-        t_array = [0, 2, 9, 4, 3, 4]
+    def test_invalid_ticket(self):
+        # Тестируем некорректные данные
+        self.assertFalse(is_lucky_ticket("12345"))   # Меньше 6 цифр
+        self.assertFalse(is_lucky_ticket("1234567")) # Больше 6 цифр
+        self.assertFalse(is_lucky_ticket("abcdef"))  # Не цифры
+        self.assertFalse(is_lucky_ticket("123 45"))  # Пробелы
+        self.assertFalse(is_lucky_ticket(""))        # Пустая строка
 
-        result = lucky_ticket.addition(t_array)
-
-        self.assertEqual(result, True)
-
-    # А этот тест - к неравенству
-    def test_addition_not_equal(self):
-        t_array = [6, 1, 0, 5, 8, 1]
-
-        result = lucky_ticket.addition(t_array)
-
-        self.assertEqual(result, False)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
